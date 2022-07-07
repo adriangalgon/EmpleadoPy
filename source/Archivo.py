@@ -6,10 +6,7 @@ class Lectura:
         pass
 
     def leer_archivo(self):
-        lista = []
-        i=1
-        url = "http://localhost:8080/view/creaemployee"
-
+        url = "http://localhost:8080/apiv1/clientes/add"
 
         with open("source/Archivos/Clientes.txt") as file:
             for line in file:
@@ -18,10 +15,14 @@ class Lectura:
                 myList = [i.rstrip() for i in myList]
                 myList = [i.lstrip() for i in myList]
 
-                _json = {"surname": str(myList[0]), "firstname": str(myList[1]) }
+                _json = {"surname": str(myList[0]),
+                         "firstname": str(myList[1]),
+                         "name_coun": str(myList[2]),
+                         "name_lang": str(myList[3]),
+                         "name_air": str(myList[4])}
 
                 _headers = {"Content-Type": "application/json"}
 
                 response = requests.post(url,data=json.dumps(_json), headers=_headers)
 
-                print("respuesta",response)
+                print("respuesta", _json)
